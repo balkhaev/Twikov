@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <div style="display: flex">
+        <div v-for="gun in guns">
+          <img :src="gun.image" />
+          {{gun.name}}
+        </div>
+      </div>
+      <div>2</div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8"></script>
+    <script>
+      async function init() {
+        const response = await fetch("/api")
+        const data = await response.json()
+
+        var app = new Vue({
+          el: "#app",
+          data: {
+            guns: data,
+          },
+        })
+      }
+
+      init()
+    </script>
+  </body>
+</html>
