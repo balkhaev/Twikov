@@ -4,54 +4,79 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link type="text/css" rel="stylesheet" href="/roulette.css" />
+    <style>
+      .roulette {
+        position: relative;
+      }
+      .roulette + .roulette {
+        margin-top: 24px;
+      }
+      .roulette::after {
+        content: "";
+        display: block;
+        position: absolute;
+        border: 1px solid;
+        height: 99%;
+        width: 150px;
+        left: 50%;
+        top: 0;
+        transform: translateX(-44%);
+      }
+      .roulette-wrapper {
+        display: flex;
+        transition: all 2s ease-in-out;
+      }
+      .roulette-item {
+        min-width: 150px;
+        border: 1px solid #c1c1c1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+      .roulette-item-title {
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+      .roulette-item-image {
+        width: 100%;
+      }
+    </style>
   </head>
   <body>
-    <div id="app" class="roulette roulette-demo">
-      <div class="roulette roulette-demo">
-        <div class="roulette-wrapper">
-          <div class="roulette-item" v-for="gun in guns">
-            <img :src="gun.image" />
-            {{gun.name}}
+    <div id="app">
+      <div id="guns" class="roulette">
+        <div class="roulette-wrapper" :style="{transform: translateXGun}">
+          <div class="roulette-item" ref="guns" v-for="gun in guns">
+            <img :src="gun.image" class="roulette-item-image" />
+            <div class="roulette-item-title">{{gun.name}}</div>
           </div>
         </div>
       </div>
-      <div class="roulette roulette-demo">
-        <div class="roulette-wrapper">
-          <div class="roulette-item" v-for="armor in armors">
-            <img :src="armor.baseImageLink" />
-            {{armor.name}}
+      <div id="armors" class="roulette">
+        <div class="roulette-wrapper" :style="{transform: translateXArmor}">
+          <div class="roulette-item" ref="armors" v-for="armor in armors">
+            <img :src="armor.baseImageLink" class="roulette-item-image" />
+            <div class="roulette-item-title">{{armor.name}}</div>
           </div>
         </div>
       </div>
-      <div class="roulette roulette-demo">
-        <div class="roulette-wrapper">
-          <div class="roulette-item" v-for="helmet in helmets">
-            <img :src="helmet.baseImageLink" />
-            {{helmet.name}}
+      <div id="helmets" class="roulette">
+        <div class="roulette-wrapper" :style="{transform: translateXHelmet}">
+          <div class="roulette-item" ref="helmets" v-for="helmet in helmets">
+            <img :src="helmet.baseImageLink" class="roulette-item-image" />
+            <div class="roulette-item-title">{{helmet.name}}</div>
           </div>
         </div>
       </div>
+      <div @click="startRoulette">GENER</div>
     </div>
-    <div class="btn-roulette-start">GENER</div>
+
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="/roulette.js"></script>
-    <script>
-      async function init() {
-        const { data } = await axios.post("/api")
-
-        var app = new Vue({
-          el: "#app",
-          data: {
-            guns: data.guns,
-            armors: data.armors,
-            helmets: data.helmets,
-          },
-        })
-      }
-
-      init()
-    </script>
+    <script src="/script.js"></script>
   </body>
 </html>

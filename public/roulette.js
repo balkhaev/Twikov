@@ -148,6 +148,7 @@ class EasyRoulette {
       return false
     }
 
+    const data = []
     const item = this.getItemByPosition(winner, false)
 
     if (!item) {
