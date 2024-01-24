@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link type="text/css" rel="stylesheet" href="/roulette.css" />
+  </head>
+  <body>
+    <div id="app" class="roulette roulette-demo">
+      <div class="roulette roulette-demo">
+        <div class="roulette-wrapper">
+          <div class="roulette-item" v-for="gun in guns">
+            <img :src="gun.image" />
+            {{gun.name}}
+          </div>
+        </div>
+      </div>
+      <div class="roulette roulette-demo">
+        <div class="roulette-wrapper">
+          <div class="roulette-item" v-for="armor in armors">
+            <img :src="armor.baseImageLink" />
+            {{armor.name}}
+          </div>
+        </div>
+      </div>
+      <div class="roulette roulette-demo">
+        <div class="roulette-wrapper">
+          <div class="roulette-item" v-for="helmet in helmets">
+            <img :src="helmet.baseImageLink" />
+            {{helmet.name}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="btn-roulette-start">GENER</div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/roulette.js"></script>
+    <script>
+      async function init() {
+        const { data } = await axios.post("/api")
+
+        var app = new Vue({
+          el: "#app",
+          data: {
+            guns: data.guns,
+            armors: data.armors,
+            helmets: data.helmets,
+          },
+        })
+      }
+
+      init()
+    </script>
+  </body>
+</html>

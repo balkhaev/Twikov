@@ -1,0 +1,129 @@
+.btn,
+.form-control,
+.custom-select-lg,
+.nav-pills .nav-link {
+  height: calc(1.5em + 2rem + 2px);
+  padding: .75rem 1.5rem;
+  border-radius: var(--border-radius);
+  font-size: 1.5rem;
+}
+.nav.nav-pills.flex-column {
+  gap: var(--default-gap);
+}
+.nav-pills .nav-link {
+  color: #333;
+  background-color: #f1f1f1;
+}
+.nav-pills .nav-link:not(.active):hover {
+  background-color: #cce5ff;
+}
+.nav-pills .nav-link.active {
+  color: #fff;
+  background-color: #007bff;
+}
+.btn {
+  font-weight: 500;
+  text-transform: uppercase
+}
+.form-group {
+  margin-bottom: 2rem
+}
+label {
+  margin-bottom: 1rem
+}
+.section-roulette-history:not(.in) {
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+}
+.roulette-history {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  gap: var(--default-gap);
+  min-height: 5rem;
+  overflow-y: auto
+}
+
+.roulette-history-item {
+  flex: 0 0 5rem;
+  max-width: 5rem;
+}
+
+.roulette-history-item > div {
+  border-radius: var(--border-radius);
+}
+
+.roulette {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+.roulette.roulette-demo {
+
+}
+.roulette.roulette-demo:before {
+    /*content: '';*/
+    position: absolute;
+    left: calc(50% - 0.75rem / 2);
+    top: 0;
+    width: 0;
+    height: 0;
+    border-top: solid 1.25rem #e15915;
+    border-left: solid 0.75rem transparent;
+    border-right: solid 0.75rem transparent;
+    z-index: 12;
+}
+.roulette.roulette-demo:after {
+    content: '';
+    position: absolute;
+    left: calc(50% - 0.75rem / 2);
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-bottom: solid 1.25rem #e15915;
+    border-left: solid 0.75rem transparent;
+    border-right: solid 0.75rem transparent;
+    z-index: 12;
+}
+
+.roulette-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+
+.roulette-item {
+  width: 100%;
+  min-width: 50px;
+  
+  height: 100%;
+  min-height: 10rem;
+}
+
+.roulette-item-inner {
+  width: 100%;
+  text-align: center;
+}
+.roulette-item-demo .roulette-item-inner {
+}
+.roulette-item-demo .roulette-item-icon {
+  line-height: 10rem;
+}
+.roulette-item-demo .roulette-item-icon svg {
+  height: 6rem;
+}
+.roulette-item-demo .roulette-item-text {
+  line-height: 2rem;
+  background: #333;
+  color: #eee;
+  box-shadow: inset 0px 0px 1px 1px #fff;
+}
+.roulette-item-demo.active .roulette-item-text,
+.roulette-item-demo:hover .roulette-item-text {
+  color: #333;
+  background: #b6ff62;
+  font-weight: 600;
+  box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,.25)
+}
