@@ -14,3 +14,5 @@ app.post("/api", async (req, res) => {
 app.use(express.static("public"))
 
 app.listen(3333)
+
+console.log("hUY!")
