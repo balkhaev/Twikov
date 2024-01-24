@@ -2,7 +2,7 @@ const { request, gql } = require("graphql-request")
 
 const query = gql`
   {
-    items(lang: ru, limit: 2000, type: gun) {
+    items(lang: ru, limit: 4000, types: [gun, armor, helmet]) {
       id
       categories {
         id
@@ -17,6 +17,7 @@ const query = gql`
       height
       weight
       updated
+      baseImageLink
       properties {
         __typename
         ... on ItemPropertiesPreset {
@@ -46,15 +47,30 @@ const query = gql`
   }
 `
 
-module.exports = () => {
-  return request("https://api.tarkov.dev/graphql", query).then((data) => {
-    const withPresets = data.items.filter(
-      (item) => !!item.properties.defaultPreset
-    )
+module.exports = async () => {
+  const data = await request("https://api.tarkov.dev/graphql", query)
 
-    return withPresets.map((item) => ({
-      ...item,
-      image: `https://assets.tarkov.dev/${item.properties.defaultPreset.id}-512.webp`,
-    }))
-  })
+  const byCats = data.items.reduce(
+    (acc, cur) => {
+      if (cur.types.includes("gun")) {
+        acc.guns.push({
+          ...cur,
+          image: cur.properties.defaultPreset
+            ? `https://assets.tarkov.dev/${cur.properties.defaultPreset.id}-512.webp`
+            : undefined,
+        })
+      }
+      if (cur.types.includes("armor")) {
+        acc.armors.push(cur)
+      }
+      if (cur.types.includes("helmet")) {
+        acc.helmets.push(cur)
+      }
+
+      return acc
+    },
+    { guns: [], armors: [], helmets: [] }
+  )
+
+  return byCats
 }
